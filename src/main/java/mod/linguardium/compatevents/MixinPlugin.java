@@ -57,14 +57,6 @@ public class MixinPlugin implements IMixinConfigPlugin {
             LandPathNodeMaker=false;
         }
 
-        Set<String> toRemove= Sets.newHashSet();
-        for (String target : myTargets) {
-            if (otherTargets.contains(target)) {
-                log(Level.WARN, "Mixin being applied to same target: "+target+"\nIf other mod does not support CompatEvents, please contact that mod's author for compatibility.\nSkipping Mixin.");
-                toRemove.add(target);
-            }
-        }
-        //myTargets.removeIf(toRemove::contains);
     }
 
     @Override
