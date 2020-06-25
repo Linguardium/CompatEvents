@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "package": "mod.linguardium.compatevents.mixins",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": ["ai.pathing.LandPathNodeMakerMixin"
+
+  ],
+  "client": [],
+  "server": [],
+  "plugin": "mod.linguardium.compatevents.MixinPlugin",
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

@@ -19,7 +19,7 @@
     "client": [],
     "server": []
   },
-  "mixins": [],
+  "mixins": ["compatevents.mixins.json"],
   "depends": {
     "fabricloader": ">=0.4.0"
   }
