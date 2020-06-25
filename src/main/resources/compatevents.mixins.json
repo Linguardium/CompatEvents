@@ -2,8 +2,7 @@
   "required": true,
   "package": "mod.linguardium.compatevents.mixins",
   "compatibilityLevel": "JAVA_8",
-  "mixins": ["ai.pathing.LandPathNodeMakerMixin"
-
+  "mixins": [
   ],
   "client": [],
   "server": [],

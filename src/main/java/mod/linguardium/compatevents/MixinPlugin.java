@@ -1,7 +1,6 @@
 package mod.linguardium.compatevents;
 
 import com.google.common.collect.Sets;
-import mod.linguardium.compatevents.mixins.ai.pathing.LandPathNodeMakerMixin;
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.ModContainer;
 import net.fabricmc.loader.api.metadata.CustomValue;
@@ -11,11 +10,11 @@ import org.objectweb.asm.tree.ClassNode;
 import org.spongepowered.asm.mixin.extensibility.IMixinConfigPlugin;
 import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
 import static mod.linguardium.compatevents.CompatEvents.log;
-import static mod.linguardium.compatevents.events.ai.pathing.LandPathNodeMaker.getCommonNodeTypeCallback.EVENT;
 
 public class MixinPlugin implements IMixinConfigPlugin {
     boolean LandPathNodeMaker = false;
@@ -51,9 +50,13 @@ public class MixinPlugin implements IMixinConfigPlugin {
                 processCompatEventsValues(mod.getMetadata());
             }
         }
-        if (!LandPathNodeMaker) {
-            myTargets.remove("net.minecraft.entity.ai.pathing.LandPathNodeMaker");
+
+        if (LandPathNodeMaker && otherTargets.contains("net.minecraft.entity.ai.pathing.LandPathNodeMaker")) {
+            //myTargets.remove("net.minecraft.entity.ai.pathing.LandPathNodeMaker");
+            log(Level.WARN, "LandPathNodeMaker compatibility requested but another mod modifies LandPathNodeMaker.\nIf other mod does not support CompatEvents, please contact that mod's author for compatibility.\nSkipping Mixin.");
+            LandPathNodeMaker=false;
         }
+
         Set<String> toRemove= Sets.newHashSet();
         for (String target : myTargets) {
             if (otherTargets.contains(target)) {
@@ -61,12 +64,15 @@ public class MixinPlugin implements IMixinConfigPlugin {
                 toRemove.add(target);
             }
         }
-        myTargets.removeIf(toRemove::contains);
+        //myTargets.removeIf(toRemove::contains);
     }
 
     @Override
     public List<String> getMixins() {
-        return null;
+        List<String> mixins = new ArrayList<>();
+        if (LandPathNodeMaker)
+            mixins.add("ai.pathing.LandPathNodeMakerMixin");
+        return mixins;
     }
 
     @Override
