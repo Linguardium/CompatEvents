@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "id": "compatevents",
+  "version": "${version}",
+  "name": "CompatEvents",
+  "description": "Event Interfaces to ease mod compatibility",
+  "authors": [
+    "Linguardium"
+  ],
+  "contributors": [],
+  "contact": {},
+  "license": "MIT",
+  "icon": "assets/compatevents/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "mod.linguardium.compatevents.CompatEvents"
+    ],
+    "client": [],
+    "server": []
+  },
+  "mixins": [],
+  "depends": {
+    "fabricloader": ">=0.4.0"
+  }
+}
